@@ -23,6 +23,11 @@ RAILWAY_HOST = config("RAILWAY_PUBLIC_DOMAIN", default="")
 if RAILWAY_HOST:
     ALLOWED_HOSTS.append(RAILWAY_HOST)
 
+# Respaldo robusto: permitir cualquier subdominio de railway.app.
+# Esto garantiza que el dominio asignado por Railway siempre sea aceptado,
+# incluso si la variable anterior no estuviera disponible al arrancar.
+ALLOWED_HOSTS.append(".railway.app")
+
 # --- Aplicaciones registradas ---
 INSTALLED_APPS = [
     # Apps propias de Django (admin, autenticación, sesiones, etc.)
