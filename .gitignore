@@ -1,0 +1,29 @@
+# ===== Secretos (CRÍTICO: nunca deben entrar al repositorio) =====
+# Contienen las claves de Meta, Anthropic, la clave de cifrado de tokens
+# y las credenciales de la base de datos.
+.env
+*.env
+!.env.example
+
+# ===== Python / Django =====
+# Entorno virtual: cientos de MB de librerías que se reinstalan con pip.
+venv/
+# Caché de bytecode de Python: se regenera solo.
+__pycache__/
+*.pyc
+# Base de datos SQLite si alguna vez se usara en pruebas.
+*.sqlite3
+# Archivos estáticos recolectados (se generan en el deploy).
+staticfiles/
+
+# ===== Node / Vue =====
+# Dependencias de npm: se reinstalan con npm install.
+frontend/node_modules/
+# Build de producción del frontend: se genera con npm run build.
+frontend/dist/
+
+# ===== Editor / Sistema =====
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
