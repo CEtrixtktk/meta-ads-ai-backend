@@ -167,3 +167,42 @@ if not DEBUG:
     # Las cookies de sesión y CSRF solo viajan por HTTPS.
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+    # --- Configuración de logging ---
+# El nivel de detalle depende del entorno: en desarrollo se registra la información
+# de depuración (incluidas las respuestas de las APIs externas); en producción solo
+# advertencias y errores. Esto evita que datos de negocio o identificadores de cuenta
+# queden registrados en los logs del servidor, que se retienen y son visibles en el panel.
+LOGGING = {
+    "version": 1,
+    # No se desactivan los loggers de Django, para no perder sus mensajes propios.
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        # Formato legible para consola de desarrollo: nivel, origen y mensaje.
+        "verbose": {
+            "format": "[{levelname}] {name}: {message}",
+            "style": "{",
+        },
+    },
+
+    "handlers": {
+        # Un único handler a consola: es lo correcto tanto en local (terminal)
+        # como en producción (Railway captura la salida estándar).
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+
+    "loggers": {
+        # Logger propio del proyecto. Todos los módulos bajo "apps." lo heredan.
+        # En desarrollo emite DEBUG (todo el detalle); en producción, solo WARNING
+        # hacia arriba, evitando registrar datos innecesarios.
+        "apps": {
+            "handlers": ["console"],
+            "level": "DEBUG" if DEBUG else "WARNING",
+            "propagate": False,
+        },
+    },
+}

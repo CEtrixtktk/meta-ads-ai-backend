@@ -76,6 +76,8 @@ class AnalyzeCampaignsView(APIView):
                 {"detail": "El servicio de análisis no está disponible. Intenta de nuevo."},
                 status=status.HTTP_502_BAD_GATEWAY,
             )
+        
+        
 
         # --- 5. Responder ---
         # Devolvemos también las métricas y metadatos para que el frontend tenga

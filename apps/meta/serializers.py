@@ -62,3 +62,12 @@ class CampaignInsightSerializer(serializers.Serializer):
     # con 'maximum' las fechas importan).
     date_start = serializers.CharField(required=False)
     date_stop = serializers.CharField(required=False)
+
+    objective = serializers.CharField(required=False, default="")
+    frequency = serializers.FloatField(default=0.0)
+    cpm = serializers.FloatField(default=0.0)
+    roas = serializers.FloatField(default=0.0)
+    # Diccionarios de conversiones e ingresos. DictField acepta estructura variable,
+    # ya que los tipos de conversión dependen de cómo esté configurada cada cuenta.
+    conversions = serializers.DictField(required=False, default=dict)
+    conversion_values = serializers.DictField(required=False, default=dict)
